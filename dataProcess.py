@@ -28,7 +28,7 @@ print(df.info())
 # keep only target and text features
 df.drop(['id','date','flag','username'], axis=1, inplace=True)
 # getting a sample of param% of the dataset
-df = df.sample(frac = 0.1)
+df = df.sample(frac = 0.5)
 
 def text_preprocessing(text):
 
