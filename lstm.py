@@ -1,17 +1,21 @@
 import numpy as np
+import pandas as pd
 import gensim
+import joblib
+import matplotlib.pyplot as plt
+import seaborn as sns
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Embedding
 from keras.models import Sequential
 from keras.layers import Dense,LSTM,Dropout
-from sklearn.metrics import confusion_matrix,accuracy_score,classification_report
+from sklearn.metrics import confusion_matrix,roc_curve,classification_report
 
 def lstm(x_train, x_test, y_train,  y_test):
     #split the tweets
     texts = [text.split() for text in x_train]
     #building vocab and training word2vec model with the tweets
-    w2v_model = gensim.models.word2vec.Word2Vec(vector_size=300, window=7, min_count=10, workers=8)
+    w2v_model = gensim.models.word2vec.Word2Vec(size=300, window=7, min_count=10, workers=8)
     w2v_model.build_vocab(texts)
     w2v_model.train(texts, total_examples=len(texts), epochs=10)
     #tokenize all the tweets
@@ -36,6 +40,18 @@ def lstm(x_train, x_test, y_train,  y_test):
     print(model.summary())
     model.compile(loss='binary_crossentropy', optimizer="adam", metrics=['accuracy'])
     #train the model
-    lstm_model = model.fit(X_train, y_train,batch_size=1024,epochs=10,validation_split=0.1,verbose=1)
-    y_pred = lstm_model.predict(X_test)
-    print(y_pred)
+    lstm_model = model.fit(X_train, y_train,batch_size=1024,epochs=15,validation_split=0.1,verbose=1)
+    #show metrics
+    acc = lstm_model.history['accuracy']
+    val_acc = lstm_model.history['val_accuracy']
+    loss = lstm_model.history['loss']
+    val_loss = lstm_model.history['val_loss']
+    epochs=range(len(acc))
+    plt.plot(epochs,acc,label='Trainin_acc',color='blue')
+    plt.plot(epochs,val_acc,label='Validation_acc',color='red')
+    plt.title("Training and Validation Accuracy - Loss")
+    plt.plot(epochs,loss,label='Training_loss',color='green')
+    plt.plot(epochs,val_loss,label='Validation_loss',color='yellow')
+    plt.legend()
+    filename = 'finalized_model.sav'
+    joblib.dump(model, filename)
