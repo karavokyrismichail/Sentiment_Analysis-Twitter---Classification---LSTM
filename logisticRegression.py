@@ -19,7 +19,7 @@ def logistic_regression(X_train, X_test, y_train,  y_test):
     sns.heatmap(clf_rprt, annot=True, ax=axes[1])
     sns.lineplot(x= fpr, y= tpr, ax=axes[2])
     
-    f.suptitle('Performance Results', fontsize=16)
+    f.suptitle('Logistic Regression - Performance Results', fontsize=16)
 
     axes[0].set_title("Confusion Matrix")
     axes[1].set_title("Classification Report")
