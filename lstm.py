@@ -1,21 +1,24 @@
 import numpy as np
 import pandas as pd
 import gensim
-import joblib
+import re
 import matplotlib.pyplot as plt
-import seaborn as sns
+import nltk
+from nltk.corpus import stopwords
 from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Embedding
 from keras.models import Sequential
 from keras.layers import Dense,LSTM,Dropout
-from sklearn.metrics import confusion_matrix,roc_curve,classification_report
+
+nltk.download('stopwords')
+stop_words = stopwords.words('english')
 
 def lstm(x_train, x_test, y_train,  y_test):
     #split the tweets
     texts = [text.split() for text in x_train]
     #building vocab and training word2vec model with the tweets
-    w2v_model = gensim.models.word2vec.Word2Vec(size=300, window=7, min_count=10, workers=8)
+    w2v_model = gensim.models.word2vec.Word2Vec(vector_size=300, window=7, min_count=10, workers=8)
     w2v_model.build_vocab(texts)
     w2v_model.train(texts, total_examples=len(texts), epochs=10)
     #tokenize all the tweets
@@ -53,5 +56,25 @@ def lstm(x_train, x_test, y_train,  y_test):
     plt.plot(epochs,loss,label='Training_loss',color='green')
     plt.plot(epochs,val_loss,label='Validation_loss',color='yellow')
     plt.legend()
-    filename = 'finalized_model.sav'
-    joblib.dump(model, filename)
+    return tokenizer, model
+
+def preprocess(tokenizer, text):
+    review=re.sub('@\S+|https?:\S+|http?:\S|[^A-Za-z0-9]+',' ',text)
+    review=review.lower()
+    review=review.split()
+    review=[word for word in review if not word in stop_words]
+    print(review)
+    review=pad_sequences(tokenizer.texts_to_sequences([review]), maxlen=300)
+    return review
+
+def prediction(model, tokenizer, review):
+    review=preprocess(tokenizer, review)
+    score=model.predict(review)
+    score=score[0]
+    if score<0.4:
+        print("Negative")
+    elif score>0.4 and score<0.6:
+        print("Neutral")
+    else:
+        print("Positive")
+    print(score)
