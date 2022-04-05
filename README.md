@@ -1,4 +1,4 @@
-# Sentiment_Analysis - Twitter - RNN
+# Sentiment_Analysis - Twitter - LSTM
 
 Project for Decision Theory Course of the Department of Computer Engineering & Informatics.
 
