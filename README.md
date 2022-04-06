@@ -1,6 +1,6 @@
 # Sentiment_Analysis - Twitter - LSTM
 
-Project for Decision Theory Course of the Department of Computer Engineering & Informatics.
+Project for the Decision Theory Course of the [Department of Computer Engineering & Informatics](https://www.ceid.upatras.gr/en).
 
 ## Description
 
