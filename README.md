@@ -13,10 +13,10 @@ Sentiment analysis for Twitter [Data](https://www.kaggle.com/kazanova/sentiment1
 
 ## Classification algorithms: 
 
-- Naive Bayes
-- Logistic Regression
+- [Naive Bayes](https://en.wikipedia.org/wiki/Naive_Bayes_classifier)
+- [Logistic Regression](https://en.wikipedia.org/wiki/Logistic_regression)
 
-## RNN model (LSTM)
+## RNN model ([LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory))
 
 - Embedding Layer
 - Dropout Layer
