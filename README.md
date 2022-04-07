@@ -1,15 +1,10 @@
-# Sentiment_Analysis - Twitter - LSTM
+# Sentiment_Analysis - Twitter - Classification - LSTM
 
 Project for the Decision Theory Course of the [Department of Computer Engineering & Informatics](https://www.ceid.upatras.gr/en).
 
 ## Description
 
 Sentiment analysis for Twitter [Data](https://www.kaggle.com/kazanova/sentiment140) (tweets) with different Machine Learning methods.
-
-## Team
-
-- [Karavokyris Michail](https://github.com/karavokyrismichail)
-- [Papachronopoulos Gerasimos](https://github.com/geras-papax)
 
 ## Classification algorithms: 
 
@@ -22,9 +17,6 @@ Sentiment analysis for Twitter [Data](https://www.kaggle.com/kazanova/sentiment1
 - Dropout Layer
 - LSTM Layer
 - Output Layer
-
-## Tech Stack
-Python, VSC, NLTK, pandas, Matplotlib, scikit-learn, Keras
 
 ## Results:
 
@@ -45,3 +37,11 @@ Python, VSC, NLTK, pandas, Matplotlib, scikit-learn, Keras
 ![ ](https://github.com/karavokyrismichail/sentiment_Twitter/blob/main/results/test2.png)
 
 ![ ](https://github.com/karavokyrismichail/sentiment_Twitter/blob/main/results/test3.png)
+
+## Tech Stack
+Python, VSC, NLTK, pandas, Matplotlib, scikit-learn, Keras
+
+## Team
+
+- [Karavokyris Michail](https://github.com/karavokyrismichail)
+- [Papachronopoulos Gerasimos](https://github.com/geras-papax)
